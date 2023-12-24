@@ -9,7 +9,8 @@ Response Body Success :
 ```json
 {
   "data": {
-    "captcha_code": "?"
+    "captcha_code": "?",
+    "token": "?"
   }
 }
 ```
@@ -18,9 +19,9 @@ Response Body Error :
 
 ```json
 {
-  "errors": {
+  "error": {
     "title": "?",
-    "message": ["?", "..."]
+    "messages": ["?", "..."]
   }
 }
 ```
@@ -33,7 +34,8 @@ Additional Request Headers :
 
 ```json
 {
-  "captcha_code": "?"
+  "Captcha-Code": "?",
+  "Authorization": "?" // token
 }
 ```
 
@@ -62,7 +64,7 @@ Response Body Error :
 
 ```json
 {
-  "errors": {
+  "error": {
     "title": "?",
     "messages": ["?", "..."]
   }
@@ -77,7 +79,8 @@ Additional Request Headers :
 
 ```json
 {
-  "captcha_code": "?"
+  "Captcha-Code": "?",
+  "Authorization": "?" // token
 }
 ```
 
@@ -106,7 +109,7 @@ Response Body Error :
 
 ```json
 {
-  "errors": {
+  "error": {
     "title": "?",
     "messages": ["?", "..."]
   }
@@ -121,7 +124,7 @@ Additional Request Headers :
 
 ```json
 {
-  "token": "?"
+  "Authorization": "?" // token
 }
 ```
 
@@ -149,7 +152,7 @@ Response Body Error :
 
 ```json
 {
-  "errors": {
+  "error": {
     "title": "?",
     "messages": ["?", "..."]
   }
@@ -164,7 +167,7 @@ Additional Request Headers :
 
 ```json
 {
-  "token": "?"
+  "Authorization": "?" // token
 }
 ```
 
@@ -182,7 +185,7 @@ Response Body Error :
 
 ```json
 {
-  "errors": {
+  "error": {
     "title": "?",
     "messages": ["?", "..."]
   }
@@ -197,7 +200,7 @@ Additional Request Headers :
 
 ```json
 {
-  "token": "?"
+  "Authorization": "?" // token
 }
 ```
 
@@ -215,7 +218,7 @@ Response Body Error :
 
 ```json
 {
-  "errors": {
+  "error": {
     "title": "?",
     "messages": ["?", "..."]
   }
