@@ -5,6 +5,20 @@ export default {
         code: 200,
         message: "OK",
       },
+      created: {
+        code: 201,
+        message: "Created",
+      },
+    },
+    clientError: {
+      badRequest: {
+        code: 400,
+        message: "Bad Request",
+      },
+      unauthorized: {
+        code: 401,
+        message: "Unauthorized",
+      },
     },
     serverError: {
       internalServerError: {

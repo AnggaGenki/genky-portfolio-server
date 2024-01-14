@@ -4,7 +4,7 @@
   "description": "Server side of the Genky Portfolio website",
   "main": "src/main.js",
   "scripts": {
-    "test": "jest -i",
+    "test": "jest -i --detectOpenHandles",
     "start": "nodemon node src/main.js",
     "graph": "git log --decorate --all --graph --oneline"
   },
@@ -21,6 +21,7 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@prisma/client": "^5.6.0",
     "bcrypt": "^5.1.1",
     "canvas": "^2.11.2",
     "cors": "^2.8.5",

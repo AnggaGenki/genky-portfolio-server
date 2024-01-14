@@ -22,14 +22,10 @@
 - varchar
 - request max length (100)
 - column max length (255)
-- reqeust min length (5)
-- reqeust valid character
-  - a-z
-  - A-Z
-  - 0-9
-  - special characters (!@#$%^&\*\_-+=/\|()[]{}:;"'<>,.?)
+- min length (5)
 
 ## token
 
 - varchar
+- null
 - max length (255)

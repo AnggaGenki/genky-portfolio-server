@@ -13,7 +13,7 @@ const ErrorMiddleware = (pErr, pReq, pRes, pNext) => {
     } else {
       pRes.status(env.httpStatus.serverError.internalServerError.code).json({
         error: {
-          title: "Server Error",
+          title: "Problematic Server",
           messages: [pErr.message],
         },
       });

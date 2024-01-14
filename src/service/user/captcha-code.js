@@ -1,8 +1,5 @@
 import { createCanvas } from "canvas";
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 const CaptchaCodeService = () => {
   const cWidth = 90;
@@ -54,7 +51,7 @@ const CaptchaCodeService = () => {
 
   const cImage = cCanvas.toDataURL();
   const cToken = jwt.sign({ captchaCode: cCode }, process.env.JWTKEY, {
-    expiresIn: 60 * 5,
+    expiresIn: 60 * 60,
   });
 
   return {

@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import publicUserRouter from "../route/public_api/user.js";
 import ErrorMiddleware from "../middleware/error.js";
+import AuthMiddleware from "../middleware/auth.js";
 
 const app = express();
 const cRequestLimit = "100kb";
@@ -25,6 +26,8 @@ app.use(
     methods: "GET",
   })
 );
+
+app.use("*/api/*", AuthMiddleware);
 
 app.use(publicUserRouter);
 

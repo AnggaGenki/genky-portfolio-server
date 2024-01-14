@@ -28,7 +28,7 @@ Response Body Error :
 
 ## User Registration
 
-Endpoint : POST /users/register
+Endpoint : POST /api/users/register
 
 Additional Request Headers :
 
@@ -73,7 +73,7 @@ Response Body Error :
 
 ## User Login
 
-Endpoint : POST /users/login
+Endpoint : POST /api/users/login
 
 Additional Request Headers :
 

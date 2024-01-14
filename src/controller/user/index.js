@@ -1,5 +1,6 @@
 import env from "../../env.js";
-import CaptchaCodeService from "../../service/user/captchaCode.js";
+import CaptchaCodeService from "../../service/user/captcha-code.js";
+import UserRegisterService from "../../service/user/user-register.js";
 
 const CaptchaCode = (pReq, pRes, pNext) => {
   try {
@@ -16,4 +17,16 @@ const CaptchaCode = (pReq, pRes, pNext) => {
   }
 };
 
-export default { CaptchaCode };
+const Register = async (pReq, pRes, pNext) => {
+  try {
+    const cResult = await UserRegisterService(pReq.body);
+
+    pRes.status(env.httpStatus.success.created.code).json({
+      data: cResult,
+    });
+  } catch (pErr) {
+    pNext(pErr);
+  }
+};
+
+export default { CaptchaCode, Register };
