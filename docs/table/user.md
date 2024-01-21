@@ -10,6 +10,7 @@
 - varchar
 - max length (100)
 - min length (3)
+- unique
 - valid character
   - a-z
   - A-Z
@@ -29,3 +30,4 @@
 - varchar
 - null
 - max length (255)
+- unique
