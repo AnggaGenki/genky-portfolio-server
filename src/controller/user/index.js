@@ -1,12 +1,16 @@
 import env from "../../env.js";
 import CaptchaCodeService from "../../service/user/captcha-code.js";
+import UserLoginService from "../../service/user/user-login.js";
 import UserRegisterService from "../../service/user/user-register.js";
+
+const cOkCode = env.httpStatus.success.OK.code;
+const cCreatedCode = env.httpStatus.success.created.code;
 
 const CaptchaCode = (pReq, pRes, pNext) => {
   try {
     const cResult = CaptchaCodeService();
 
-    pRes.status(env.httpStatus.success.OK.code).json({
+    pRes.status(cOkCode).json({
       data: {
         captcha_code: cResult.captchaCode,
         token: cResult.token,
@@ -21,7 +25,7 @@ const Register = async (pReq, pRes, pNext) => {
   try {
     const cResult = await UserRegisterService(pReq.body);
 
-    pRes.status(env.httpStatus.success.created.code).json({
+    pRes.status(cCreatedCode).json({
       data: cResult,
     });
   } catch (pErr) {
@@ -29,4 +33,16 @@ const Register = async (pReq, pRes, pNext) => {
   }
 };
 
-export default { CaptchaCode, Register };
+const Login = async (pReq, pRes, pNext) => {
+  try {
+    const cResult = await UserLoginService(pReq.body);
+
+    pRes.status(cOkCode).json({
+      data: cResult,
+    });
+  } catch (pErr) {
+    pNext(pErr);
+  }
+};
+
+export default { CaptchaCode, Register, Login };

@@ -10,4 +10,12 @@ const register = Joi.object({
   password_confirm: Joi.ref("password"),
 });
 
-export default { register };
+const login = Joi.object({
+  username: Joi.string()
+    .regex(new RegExp(validationUnit.regex.username))
+    .custom(validationUnit.InvalidSeparator)
+    .required(),
+  password: Joi.string().min(5).max(100).required(),
+});
+
+export default { register, login };

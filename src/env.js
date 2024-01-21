@@ -19,6 +19,10 @@ export default {
         code: 401,
         message: "Unauthorized",
       },
+      notFound: {
+        code: 404,
+        message: "Not Found",
+      },
     },
     serverError: {
       internalServerError: {
@@ -26,5 +30,8 @@ export default {
         message: "Internal Server Error",
       },
     },
+  },
+  appSettings: {
+    jwtExpires: 60 * 60 * 24,
   },
 };

@@ -51,7 +51,7 @@ const CaptchaCodeService = () => {
 
   const cImage = cCanvas.toDataURL();
   const cToken = jwt.sign({ captchaCode: cCode }, process.env.JWTKEY, {
-    expiresIn: 60 * 60,
+    expiresIn: 60 * 5,
   });
 
   return {

@@ -32,7 +32,7 @@ const UserRegisterService = async (pReqBody) => {
 
   const cLoginToken = uuid().toString();
   const cToken = jwt.sign({ loginToken: cLoginToken }, process.env.JWTKEY, {
-    expiresIn: 60 * 60 * 24,
+    expiresIn: env.appSettings.jwtExpires,
   });
 
   const cQueryCreateUser = await prismaClient.user.create({

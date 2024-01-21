@@ -89,8 +89,7 @@ Request Body :
 ```json
 {
   "username": "?",
-  "password": "?",
-  "password_confirm": "?"
+  "password": "?"
 }
 ```
 

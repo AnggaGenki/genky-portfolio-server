@@ -1,9 +1,8 @@
 import express from "express";
-import UserController from "../../controller/user/index.js";
+import userController from "../../controller/user/index.js";
 
 const publicUserRouter = express.Router();
 
-publicUserRouter.get("/captchaCode", UserController.CaptchaCode);
-publicUserRouter.post("/api/users/register", UserController.Register);
+publicUserRouter.get("/captchaCode", userController.CaptchaCode);
 
 export default publicUserRouter;
