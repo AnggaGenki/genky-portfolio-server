@@ -133,7 +133,8 @@ Request Body :
 {
   "username": "?", // optional
   "password": "?", // optional
-  "password_confirm": "?" // appears if the password exists
+  "password_confirm": "?", // appears if the password exists
+  "current_password": "?" // appears if the password exists
 }
 ```
 

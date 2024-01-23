@@ -10,7 +10,7 @@ import jwt from "jsonwebtoken";
 const UserLoginService = async (pReqBody) => {
   const cReqBody = Validate(userValidation.login, pReqBody);
 
-  const cQueryFindUser = await prismaClient.user.findFirst({
+  const cQueryFindUser = await prismaClient.user.findUnique({
     where: {
       username: cReqBody.username,
     },

@@ -23,6 +23,10 @@ export default {
         code: 404,
         message: "Not Found",
       },
+      unprocessableEntity: {
+        code: 422,
+        message: "Unprocessable Entity",
+      },
     },
     serverError: {
       internalServerError: {

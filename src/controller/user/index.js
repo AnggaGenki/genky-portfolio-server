@@ -1,5 +1,6 @@
 import env from "../../env.js";
 import CaptchaCodeService from "../../service/user/captcha-code.js";
+import UserUpdateService from "../../service/user/update.js";
 import UserLoginService from "../../service/user/user-login.js";
 import UserRegisterService from "../../service/user/user-register.js";
 
@@ -45,4 +46,16 @@ const Login = async (pReq, pRes, pNext) => {
   }
 };
 
-export default { CaptchaCode, Register, Login };
+const Update = async (pReq, pRes, pNext) => {
+  try {
+    const cResult = await UserUpdateService(pReq.user, pReq.body);
+
+    pRes.status(cOkCode).json({
+      data: cResult,
+    });
+  } catch (pErr) {
+    pNext(pErr);
+  }
+};
+
+export default { CaptchaCode, Register, Login, Update };

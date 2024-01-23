@@ -4,7 +4,7 @@
   "description": "Server side of the Genky Portfolio website",
   "main": "src/main.js",
   "scripts": {
-    "test": "jest -i --detectOpenHandles",
+    "test": "jest -i",
     "start": "nodemon node src/main.js",
     "graph": "git log --decorate --all --graph --oneline"
   },

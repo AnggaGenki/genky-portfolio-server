@@ -1,21 +1,22 @@
 import Joi from "joi";
-import validationUnit from "./validation-unit.js";
+import validationData from "./validation-data.js";
 
 const register = Joi.object({
-  username: Joi.string()
-    .regex(new RegExp(validationUnit.regex.username))
-    .custom(validationUnit.InvalidSeparator)
-    .required(),
-  password: Joi.string().min(5).max(100).required(),
-  password_confirm: Joi.ref("password"),
+  username: validationData.username.default,
+  password: validationData.password.default,
+  password_confirm: validationData.passwordConfirm.default,
 });
 
 const login = Joi.object({
-  username: Joi.string()
-    .regex(new RegExp(validationUnit.regex.username))
-    .custom(validationUnit.InvalidSeparator)
-    .required(),
-  password: Joi.string().min(5).max(100).required(),
+  username: validationData.username.default,
+  password: validationData.password.default,
 });
 
-export default { register, login };
+const update = Joi.object({
+  username: validationData.username.update,
+  password: validationData.password.update,
+  password_confirm: validationData.passwordConfirm.default,
+  current_password: validationData.currentPassword.default,
+});
+
+export default { register, login, update };
