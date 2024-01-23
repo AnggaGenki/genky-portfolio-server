@@ -2,7 +2,7 @@ import prismaClient from "../../application/database.js";
 import env from "../../env.js";
 import ResponseError from "../../error/response.js";
 import userValidation from "../../validation/user.js";
-import Validate from "../../validation/validation.js";
+import Validate from "../../validation/tools/validation.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { v4 as uuid } from "uuid";

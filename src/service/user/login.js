@@ -1,4 +1,4 @@
-import Validate from "../../validation/validation.js";
+import Validate from "../../validation/tools/validation.js";
 import userValidation from "../../validation/user.js";
 import prismaClient from "../../application/database.js";
 import ResponseError from "../../error/response.js";

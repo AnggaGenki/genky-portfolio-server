@@ -1,8 +1,8 @@
-import env from "../../env.js";
-import CaptchaCodeService from "../../service/user/captcha-code.js";
-import UserUpdateService from "../../service/user/update.js";
-import UserLoginService from "../../service/user/user-login.js";
-import UserRegisterService from "../../service/user/user-register.js";
+import env from "../env.js";
+import CaptchaCodeService from "../service/user/captcha-code.js";
+import UserUpdateService from "../service/user/update.js";
+import UserLoginService from "../service/user/login.js";
+import UserRegisterService from "../service/user/register.js";
 
 const cOkCode = env.httpStatus.success.OK.code;
 const cCreatedCode = env.httpStatus.success.created.code;

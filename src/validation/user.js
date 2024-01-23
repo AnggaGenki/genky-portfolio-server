@@ -1,5 +1,5 @@
 import Joi from "joi";
-import validationData from "./validation-data.js";
+import validationData from "./tools/validation-data.js";
 
 const register = Joi.object({
   username: validationData.username.default,
