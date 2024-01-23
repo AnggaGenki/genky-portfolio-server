@@ -87,6 +87,23 @@ describe("POST /api/users/register", () => {
     }
   });
 
+  it("should be rejected if username is undefined", async () => {
+    const cAuth = testUtil.GetCaptchaCode();
+    const cResult = await supertest(app)
+      .post("/api/users/register")
+      .send({
+        password: "test123",
+        password_confirm: "test123",
+      })
+      .set("Captcha-Code", cAuth.captchaCode)
+      .set("Authorization", cAuth.token);
+
+    expect(cResult.status).toBe(400);
+    expect(cResult.body.error.title).toBe("Username Validation Failed");
+    expect(typeof cResult.body.error.messages).toBe("object");
+    expect(cResult.body.data).toBeUndefined();
+  });
+
   it("should be rejected if password validation fails", async () => {
     const cAuth = testUtil.GetCaptchaCode();
     const cPasswordFailValidation = [
@@ -112,6 +129,23 @@ describe("POST /api/users/register", () => {
       expect(typeof cResult.body.error.messages).toBe("object");
       expect(cResult.body.data).toBeUndefined();
     }
+  });
+
+  it("should be rejected if password is undefined", async () => {
+    const cAuth = testUtil.GetCaptchaCode();
+    const cResult = await supertest(app)
+      .post("/api/users/register")
+      .send({
+        username: "test",
+        password_confirm: "test123",
+      })
+      .set("Captcha-Code", cAuth.captchaCode)
+      .set("Authorization", cAuth.token);
+
+    expect(cResult.status).toBe(400);
+    expect(cResult.body.error.title).toBe("Password Validation Failed");
+    expect(typeof cResult.body.error.messages).toBe("object");
+    expect(cResult.body.data).toBeUndefined();
   });
 
   it("should be rejected if password confirmation validation fails", async () => {
@@ -245,6 +279,22 @@ describe("POST /api/users/login", () => {
     }
   });
 
+  it("should be rejected if username is undefined", async () => {
+    const cAuth = testUtil.GetCaptchaCode();
+    const cResult = await supertest(app)
+      .post("/api/users/login")
+      .send({
+        password: "test123",
+      })
+      .set("Captcha-Code", cAuth.captchaCode)
+      .set("Authorization", cAuth.token);
+
+    expect(cResult.status).toBe(400);
+    expect(cResult.body.error.title).toBe("Username Validation Failed");
+    expect(typeof cResult.body.error.messages).toBe("object");
+    expect(cResult.body.data).toBeUndefined();
+  });
+
   it("should be rejected if password validation fails", async () => {
     const cAuth = testUtil.GetCaptchaCode();
     const cPasswordFailValidation = [
@@ -269,6 +319,22 @@ describe("POST /api/users/login", () => {
       expect(typeof cResult.body.error.messages).toBe("object");
       expect(cResult.body.data).toBeUndefined();
     }
+  });
+
+  it("should be rejected if password is undefined", async () => {
+    const cAuth = testUtil.GetCaptchaCode();
+    const cResult = await supertest(app)
+      .post("/api/users/login")
+      .send({
+        username: "test",
+      })
+      .set("Captcha-Code", cAuth.captchaCode)
+      .set("Authorization", cAuth.token);
+
+    expect(cResult.status).toBe(400);
+    expect(cResult.body.error.title).toBe("Password Validation Failed");
+    expect(typeof cResult.body.error.messages).toBe("object");
+    expect(cResult.body.data).toBeUndefined();
   });
 });
 
