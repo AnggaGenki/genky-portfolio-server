@@ -176,7 +176,7 @@ Response Body Success :
 ```json
 {
   "data": {
-    "status": "Logout Success"
+    "status": "Logout Successful"
   }
 }
 ```
@@ -209,7 +209,7 @@ Response Body Success :
 ```json
 {
   "data": {
-    "status": "Delete Account Success"
+    "status": "Delete Account Successfully"
   }
 }
 ```

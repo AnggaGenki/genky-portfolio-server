@@ -617,3 +617,30 @@ describe("PATCH /api/users/update", () => {
     expect(cResult.body.data).toBeUndefined();
   });
 });
+
+describe("DELETE /api/users/delete", () => {
+  beforeEach(async () => {
+    await testUtil.CreateTestUser("test", "test123");
+  });
+
+  afterEach(async () => {
+    await testUtil.DeleteTestUsers("test");
+  });
+
+  it("should be able to log out", async () => {
+    const cAuth = testUtil.GetCaptchaCode();
+    const cLoginToken = await testUtil.GetLoginToken(
+      "test",
+      "test123",
+      cAuth.captchaCode,
+      cAuth.token
+    );
+    const cResult = await supertest(app)
+      .delete("/api/users/logout")
+      .set("Authorization", cLoginToken);
+
+    expect(cResult.status).toBe(200);
+    expect(cResult.body.data.status).toBe("Logout Successful");
+    expect(cResult.body.error).toBeUndefined();
+  });
+});
