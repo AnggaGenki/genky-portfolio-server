@@ -4,6 +4,7 @@ import UserUpdateService from "../service/user/update.js";
 import UserLoginService from "../service/user/login.js";
 import UserRegisterService from "../service/user/register.js";
 import UserLogoutService from "../service/user/logout.js";
+import UserDeleteService from "../service/user/delete.js";
 
 const cOkCode = env.httpStatus.success.OK.code;
 const cCreatedCode = env.httpStatus.success.created.code;
@@ -73,4 +74,18 @@ const Logout = async (pReq, pRes, pNext) => {
   }
 };
 
-export default { CaptchaCode, Register, Login, Update, Logout };
+const Delete = async (pReq, pRes, pNext) => {
+  try {
+    await UserDeleteService(pReq.user);
+
+    pRes.status(cOkCode).json({
+      data: {
+        status: "Delete Account Successfully",
+      },
+    });
+  } catch (pErr) {
+    pNext(pErr);
+  }
+};
+
+export default { CaptchaCode, Register, Login, Update, Logout, Delete };
