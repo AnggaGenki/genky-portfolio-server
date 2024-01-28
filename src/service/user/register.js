@@ -18,7 +18,7 @@ const UserRegisterService = async (pReqBody) => {
 
   if (cQueryCountUser > 0) {
     throw new ResponseError(
-      env.httpStatus.clientError.badRequest.code,
+      env.httpStatus.clientError.conflict.code,
       "Username Already Exists",
       [
         "Registration failed",

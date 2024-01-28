@@ -27,6 +27,10 @@ export default {
         code: 422,
         message: "Unprocessable Entity",
       },
+      conflict: {
+        code: 409,
+        message: "Conflict",
+      },
     },
     serverError: {
       internalServerError: {

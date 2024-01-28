@@ -5,6 +5,12 @@ import { v4 as uuid } from "uuid";
 import supertest from "supertest";
 import app from "../src/application/app.js";
 
+const env = {
+  setCaptchaCode: "Captcha-Code",
+  setAuthentication: "Authentication",
+  setAuthorization: "Authorization",
+};
+
 const DeleteTestUsers = async (pUsername) => {
   await prismaClient.user.deleteMany({
     where: {
@@ -13,19 +19,15 @@ const DeleteTestUsers = async (pUsername) => {
   });
 };
 
-const GetCaptchaCode = (
-  pTokenKeyword = process.env.TOKENKEY,
-  pCode = "abc123",
-  pExpiresIn = 60 * 5
-) => {
-  const cCaptchaCode = pCode;
+const GetCaptchaCode = (pExpiresIn = 60 * 5) => {
+  const cCaptchaCode = "abc123";
   const cToken = jwt.sign({ captchaCode: cCaptchaCode }, process.env.JWTKEY, {
     expiresIn: pExpiresIn,
   });
 
   return {
     captchaCode: cCaptchaCode,
-    token: `${pTokenKeyword} ${cToken}`,
+    token: `${process.env.TOKENKEY} ${cToken}`,
   };
 };
 
@@ -43,8 +45,7 @@ const GetLoginToken = async (
   pUsername,
   pPassword,
   pCaptchaCode,
-  pAuthorization,
-  pTokenKeyword = process.env.TOKENKEY,
+  pAuthentication,
   pExpiresLoginToken = 60 * 60 * 24,
   pLoginToken = null
 ) => {
@@ -55,7 +56,7 @@ const GetLoginToken = async (
       password: pPassword,
     })
     .set("Captcha-Code", pCaptchaCode)
-    .set("Authorization", pAuthorization);
+    .set("Authentication", pAuthentication);
 
   const cVerifyJwt = jwt.verify(cLogin.body.data.token, process.env.JWTKEY);
   const cLoginToken = jwt.sign(
@@ -66,12 +67,28 @@ const GetLoginToken = async (
     }
   );
 
-  return `${pTokenKeyword} ${cLoginToken}`;
+  return `${process.env.TOKENKEY} ${cLoginToken}`;
+};
+
+const GetTestUser = async (pUsername) => {
+  return prismaClient.user.findUnique({
+    where: {
+      username: pUsername,
+    },
+  });
+};
+
+const AllowedObjectProps = (pAllowed, pObject) => {
+  pObject = Object.keys(pObject);
+  expect(pObject).toEqual(pAllowed);
 };
 
 export default {
+  env,
   DeleteTestUsers,
   GetCaptchaCode,
   CreateTestUser,
   GetLoginToken,
+  GetTestUser,
+  AllowedObjectProps,
 };

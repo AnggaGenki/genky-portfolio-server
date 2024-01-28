@@ -35,7 +35,7 @@ Additional Request Headers :
 ```json
 {
   "Captcha-Code": "?",
-  "Authorization": "?" // token
+  "Authentication": "?" // token
 }
 ```
 
@@ -80,7 +80,7 @@ Additional Request Headers :
 ```json
 {
   "Captcha-Code": "?",
-  "Authorization": "?" // token
+  "Authentication": "?" // token
 }
 ```
 

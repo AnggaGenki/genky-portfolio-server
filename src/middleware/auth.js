@@ -67,44 +67,66 @@ const fResponseError = (pReq, pRes, pErrorType) => {
 };
 
 const AuthMiddleware = (pReq, pRes, pNext) => {
-  const cToken = pReq.headers.authorization.split(" ");
+  const cOriginalUrl = pReq.originalUrl;
+  let vToken = null;
 
-  if (cToken[0] === process.env.TOKENKEY) {
-    jwt.verify(cToken[1], process.env.JWTKEY, async (pErr, pData) => {
-      if (pErr) {
-        if (pErr.message === "jwt expired") {
-          fResponseError(pReq, pRes, "jwt expired");
-        } else {
-          fResponseError(pReq, pRes, "another error");
-        }
-      } else {
-        if (pData.captchaCode) {
-          if (pData.captchaCode === pReq.headers["captcha-code"]) {
-            pNext();
-          } else {
-            fResponseError(pReq, pRes, "unmatch code");
-          }
-        } else {
-          const cQueryFindUser = await prismaClient.user.findUnique({
-            where: {
-              token: pData.loginToken,
-            },
-            select: {
-              id: true,
-              username: true,
-              password: true,
-            },
-          });
+  if (
+    cOriginalUrl === "/api/users/login" ||
+    cOriginalUrl === "/api/users/register"
+  ) {
+    const cAuthenticationToken = pReq.headers.authentication;
 
-          if (cQueryFindUser) {
-            pReq.user = cQueryFindUser;
-            pNext();
+    if (cAuthenticationToken) {
+      vToken = cAuthenticationToken.split(" ");
+    }
+  } else {
+    const cAuthorizationToken = pReq.headers.authorization;
+
+    if (cAuthorizationToken) {
+      vToken = cAuthorizationToken.split(" ");
+    }
+  }
+
+  if (vToken) {
+    if (vToken[0] === process.env.TOKENKEY) {
+      jwt.verify(vToken[1], process.env.JWTKEY, async (pErr, pData) => {
+        if (pErr) {
+          if (pErr.message === "jwt expired") {
+            fResponseError(pReq, pRes, "jwt expired");
           } else {
             fResponseError(pReq, pRes, "another error");
           }
+        } else {
+          if (pData.captchaCode) {
+            if (pData.captchaCode === pReq.headers["captcha-code"]) {
+              pNext();
+            } else {
+              fResponseError(pReq, pRes, "unmatch code");
+            }
+          } else {
+            const cQueryFindUser = await prismaClient.user.findUnique({
+              where: {
+                token: pData.loginToken,
+              },
+              select: {
+                id: true,
+                username: true,
+                password: true,
+              },
+            });
+
+            if (cQueryFindUser) {
+              pReq.user = cQueryFindUser;
+              pNext();
+            } else {
+              fResponseError(pReq, pRes, "another error");
+            }
+          }
         }
-      }
-    });
+      });
+    } else {
+      fResponseError(pReq, pRes, "another error");
+    }
   } else {
     fResponseError(pReq, pRes, "another error");
   }
